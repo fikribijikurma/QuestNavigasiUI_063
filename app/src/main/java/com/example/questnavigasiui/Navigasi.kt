@@ -1,9 +1,17 @@
 package com.example.questnavigasiui
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 
 enum class Navigasi {
     Formulirku,
-
     Detail
 }
 
@@ -12,24 +20,29 @@ fun DataApp(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier
 ) {
-    scaffold {
-        isiRuang->
+    Scaffold { isiRuang ->
         NavHost(
             navController = navController,
             startDestination = Navigasi.Formulirku.name,
 
-            modifier = Modifier.padding(isiRuang)){
-            composable(route = Navigasi.Formulirku.name){
-                FormIsian (
+            modifier = Modifier.padding(isiRuang)
+        ) {
+            composable(route = Navigasi.Formulirku.name) {
+                FormIsian(
                     //pilihanjk = jenisK.map { id -> context.resources.getString(id) },
                     onSubmitButtonClick = {
                         navController.navigate(Navigasi.Detail.name)
                     }
                 )
             }
-
+            composable(route = Navigasi.Detail.name) {
+                TampilData(
+                    onBackBtnClick = {
+                        cancelAndBackToFormulirku(navController)
+                    }
+                )
+            }
         }
     }
-
 }
-)
+
