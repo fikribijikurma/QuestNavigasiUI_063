@@ -2,6 +2,8 @@ package com.example.questnavigasiui.view
 
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
@@ -84,7 +86,13 @@ fun Formisian(
                 label = {Text(text = "alamat")},
                 onValueChange = {}
             )
-
+            spacer(modifier = Modifier.height(30.dp))
+            Button(
+                modifier = Modifier.fillMaxWidth(1f),
+                onClick = onSubmitButtonClick
+            ) {
+                Text(text = stringResource(id = R.string.submit))
+            }
         }
     }
 }
